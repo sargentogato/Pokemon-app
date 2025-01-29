@@ -1,9 +1,13 @@
+:root {
+  --time-fade-in:3s
+}
+
 .fade-in {
-  animation: fadeIn 0.3s;
-  -webkit-animation: fadeIn 0.3s;
-  -moz-animation: fadeIn 0.3s;
-  -o-animation: fadeIn 0.3s;
-  -ms-animation: fadeIn 0.3s;
+  animation: fadeIn var(--time-fade-in);
+  -webkit-animation: fadeIn var(--time-fade-in);
+  -moz-animation: fadeIn var(--time-fade-in);
+  -o-animation: fadeIn var(--time-fade-in);
+  -ms-animation: fadeIn var(--time-fade-in);
 }
 @keyframes fadeIn {
   0% {

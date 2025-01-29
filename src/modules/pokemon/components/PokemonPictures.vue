@@ -1,10 +1,20 @@
 <template>
   <section>
-    <img class="brightness-0" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/132.svg" alt="">
+    <img :class="{'brightness-0': !showPokemon}" :src="pokemonImage" class="h-[200px] fade-in"    alt="">
   </section>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
+
+interface IProps {
+  pokemonId: number,
+  showPokemon?: boolean
+}
+
+const props = defineProps<IProps>()
+
+const pokemonImage = computed(() => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${props.pokemonId}.svg`)
 
 </script>
 

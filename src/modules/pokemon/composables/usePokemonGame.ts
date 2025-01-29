@@ -1,20 +1,22 @@
-import { computed, onMounted, ref } from "vue";
-import { pokemonApi } from "../api/pokemonApi";
-import { GameStatus, type IPokemon, type IPokemonListResponse } from "../interface";
+import confetti from 'canvas-confetti';
+import { computed, onMounted, ref } from 'vue';
+import { pokemonApi } from '../api/pokemonApi';
+import { GameStatus, type IPokemon, type IPokemonListResponse } from '../interface';
 
 export const usePokemonGame = () => {
   const gameStatus = ref<GameStatus>(GameStatus.Playing);
   const pokemons = ref<IPokemon[]>([]);
   const pokemonOptions = ref<IPokemon[]>();
+  const higlightButton = ref<number>(0)
 
   const isLoading = computed(() => pokemons.value.length === 0);
 
   const randomPokemon = computed(() => {
-    if (!pokemonOptions.value?.length) return
+    if (!pokemonOptions.value?.length) return;
 
     const selectedPokemon = Math.floor(Math.random() * pokemonOptions.value!.length);
 
-    return pokemonOptions.value![selectedPokemon!].name;
+    return pokemonOptions.value![selectedPokemon!];
   });
 
   // const randomPokemon = computed(() => pokemonOptions.value![Math.floor(Math.random() * pokemonOptions.value!.length)].name)
@@ -28,7 +30,7 @@ export const usePokemonGame = () => {
   };
 
   const extractPokemonNameAndId = (response: IPokemonListResponse) => {
-    const pokemonArray = response.results.map(pokemon => {
+    const pokemonArray = response.results.map((pokemon) => {
       const urlParts = pokemon.url.split('/');
       const id = urlParts.at(-2) ?? 0;
 
@@ -59,8 +61,26 @@ export const usePokemonGame = () => {
     pokemons.value = pokemons.value.slice(howMany); //Devuelve el array con los elementos a partir del index 4 (no incluye el 4)
   };
 
+  const checkAnswer = (id:number) => {
+    const hasWon = randomPokemon.value?.id === id;
+
+    if (hasWon) {
+      gameStatus.value = GameStatus.Won
+      confetti({
+        particleCount: 300,
+        spread:        200,
+        origin:        { y: 0.5, x: 0.5 }
+      });
+
+      higlightButton.value = id;
+      return
+    }
+
+    gameStatus.value = GameStatus.lost;
+  }
+
   onMounted(async () => {
-    await new Promise(response => setTimeout(response, 1000));
+    await new Promise((response) => setTimeout(response, 0));
 
     pokemons.value = await getPokemons();
     getNextOptions();
@@ -70,8 +90,11 @@ export const usePokemonGame = () => {
     gameStatus,
     isLoading,
     randomPokemon,
+    pokemonOptions,
+    higlightButton,
 
     //Methods
     getNextOptions,
+    checkAnswer
   };
 };

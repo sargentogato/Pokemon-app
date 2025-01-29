@@ -5,6 +5,5 @@
   "printWidth": 100,
   "trailingComma": "all",
   "singleAttributePerLine": true,
-  "prettier.bracketSpacing": false,
-  "align-object-properties": true
+  "prettier.bracketSpacing": false
 }

@@ -31,7 +31,8 @@ export default defineConfigWithVueTs(
   skipFormatting,
   {
     rules: {
-      'key-spacing': ['error', {
+      'key-spacing': ['error',
+      {
         align: 'value'
       },
       ],
