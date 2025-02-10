@@ -27,7 +27,8 @@
     <!-- Pokemon Picture -->
     <PokemonPictures
       :pokemon-id="randomPokemon?.id ?? 0"
-      :show-pokemon="true"
+      :show-pokemon="GameStatus.Playing !== gameStatus"
+
     />
 
     <!-- Pokemon Options -->
