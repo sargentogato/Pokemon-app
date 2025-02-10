@@ -27,7 +27,7 @@
     <!-- Pokemon Picture -->
     <PokemonPictures
       :pokemon-id="randomPokemon?.id ?? 0"
-      :show-pokemon="GameStatus.Playing !== gameStatus"
+      :show-pokemon="true"
     />
 
     <!-- Pokemon Options -->
@@ -46,7 +46,7 @@ import { ref } from 'vue';
 import PokemonOptions from '../components/PokemonOptions.vue';
 import PokemonPictures from '../components/PokemonPictures.vue';
 import { usePokemonGame } from '../composables/usePokemonGame';
-import { GameStatus } from '../interface';
+import { GameStatus } from '../interfaces/interfaces';
 
 const {
   gameStatus,

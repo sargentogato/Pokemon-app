@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { IPokemon } from '../interface';
+import type { IPokemon } from '../interfaces/interfaces';
 
 interface IProps {
   options: IPokemon[];

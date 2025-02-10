@@ -1,7 +1,7 @@
 import confetti from 'canvas-confetti';
 import { computed, onMounted, ref } from 'vue';
 import { pokemonApi } from '../api/pokemonApi';
-import { GameStatus, type IPokemon, type IPokemonListResponse } from '../interface';
+import { GameStatus, type IPokemon, type IPokemonListResponse } from '../interfaces/interfaces';
 
 export const usePokemonGame = () => {
   const gameStatus = ref<GameStatus>(GameStatus.Playing);

@@ -9,7 +9,7 @@
 
     "paths": {
       "@/*": ["./src/*"],
-      "@pokemon/*": ["./src/modules/pokemon*"]
+      "@pokemon/*": ["./src/modules/pokemon/*"]
     }
   }
 }
