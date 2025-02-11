@@ -88,14 +88,16 @@ export const usePokemonGame = () => {
       return;
     }
 
-    gameStatus.value = GameStatus.lost;
+    gameStatus.value = GameStatus.Lost;
   };
 
   onMounted(async () => {
-    await new Promise((response) => setTimeout(response, 0));
-
+    console.log('onMounted');
     pokemons.value = await getPokemons();
     getNextRound();
+
+    console.log(pokemonOptions.value);
+    console.log("Finished mounted Process");
   });
 
   return {
