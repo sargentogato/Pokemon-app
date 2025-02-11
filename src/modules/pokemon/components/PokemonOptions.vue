@@ -7,11 +7,11 @@
       :key="id"
       v-bind:class="['capitalize disabled:shadow-none disabled:bg-gray-100',
         {
-          'text-2xl correct': id === idSelected && blockSelection,
-          incorrect: id !== correctAnswer && id === idSelected
+          'text-2xl correct': id === idSelected && currentGameState && id === correctAnswer,
+          'text-2xl incorrect': id !== correctAnswer && id === idSelected
         }
       ]"
-      :disabled="blockSelection"
+      :disabled="currentGameState"
       >{{ name }}</button>
     </ul>
   </section>
@@ -22,7 +22,7 @@ import type { IPokemon } from '../interfaces/interfaces';
 
 interface IProps {
   options: IPokemon[];
-  blockSelection: boolean;
+  currentGameState: boolean;
   correctAnswer: number,
   idSelected: number
 }

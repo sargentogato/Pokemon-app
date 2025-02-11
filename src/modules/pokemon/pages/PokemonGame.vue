@@ -32,10 +32,15 @@
     />
 
     <!-- Pokemon Options -->
+     <!--
+      gameStatus !== GameStatus.Playing será true cuando ambos valores
+      sean distintos. gameStatus tiene "playing y GameStatus.Playing también"
+      cuando uno de los dos cambie a otro valor, entonces la condición será true
+     -->
     <PokemonOptions
       :options="options ?? []"
       @selected-option="checkAnswer"
-      :block-selection="gameStatus !== GameStatus.Playing"
+      :current-game-state="gameStatus !== GameStatus.Playing"
       :correct-answer="randomPokemon?.id ?? 0"
       :idSelected="idSelected ?? 0"
     />
