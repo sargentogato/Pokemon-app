@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img :class="{'brightness-0': !showPokemon}" :src="pokemonImage" class="h-[200px] fade-in"    alt="">
+    <img :class="{'brightness-0': !showPokemon}" :src="pokemonImage" class="h-[200px] fade-in"    alt="Pokemon Image">
   </section>
 </template>
 

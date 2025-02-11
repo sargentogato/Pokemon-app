@@ -13,7 +13,7 @@ export const usePokemonGame = () => {
 
   /* Llamada a la API */
   const getPokemons = async (): Promise<IPokemon[]> => {
-    const response = await pokemonApi.get<IPokemonListResponse>('/?limit=15');
+    const response = await pokemonApi.get<IPokemonListResponse>('/?limit=157wwwwwwwwww');
 
     const pokemonList = extractPokemonNameAndId(response.data);
 
