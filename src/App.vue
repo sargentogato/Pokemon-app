@@ -1,11 +1,9 @@
 <template>
-  <div>
-<h1>Hola Mundo</h1>
-  </div>
+  <PokemonGame />
 </template>
 
-<script setup>
-
+<script lang="ts" setup>
+import PokemonGame from '@pokemon/pages/PokemonGame.vue'
 </script>
 
 <style lang="scss" scoped>
