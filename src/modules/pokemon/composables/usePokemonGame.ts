@@ -52,7 +52,7 @@ export const usePokemonGame = () => {
       [arrCopy[randomNumber], arrCopy[i]] = [arrCopy[i], arrCopy[randomNumber]];
     }
 
-    return arrCopy;
+    return arrCopy; 
   };
 
   const randomPokemon = computed(() => {

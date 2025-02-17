@@ -17,9 +17,10 @@
       <button
         @click="getNextRound()"
         :class="{
-          notShow: GameStatus.Playing === 'playing',
-          show: GameStatus.Playing !== gameStatus,
+          notShow: gameStatus === GameStatus.Playing,
+          show: gameStatus !== GameStatus.Playing
         }"
+        data-test="btn-next-round"
       >
         {{ nextRoundButton }}
       </button>
@@ -29,7 +30,6 @@
     <PokemonPictures
       :pokemon-id="randomPokemon?.id ?? 0"
       :show-pokemon="GameStatus.Playing !== gameStatus"
-
     />
 
     <!-- Pokemon Options -->
@@ -65,8 +65,6 @@ const {
   checkAnswer,
   getNextRound,
 } = usePokemonGame();
-
-console.log("🚀 ~ options:", options.value);
 
 const nextRoundButton = ref('Next Round');
 </script>

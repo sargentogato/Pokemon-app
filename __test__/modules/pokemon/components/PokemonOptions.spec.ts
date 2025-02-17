@@ -94,7 +94,7 @@ describe("PokemonOption", () => {
       }
     })
   })
-  test('should apply incorrect styling to buttons base on incorrect answer', () => {
+  test('should apply incorrect class to buttons base on incorrect answer', () => {
     const wrapper = mount(PokemonOptions, {
       props: {
         options,
