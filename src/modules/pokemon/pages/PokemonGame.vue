@@ -5,6 +5,7 @@
   >
     <h1 class="text-3xl">Espere por favor</h1>
     <h3 class="animate-pulse">Cargando Pokémons</h3>
+    <h3>{{  errorMessage  }}</h3>
   </section>
 
   <section
@@ -57,12 +58,15 @@ import { GameStatus } from '../interfaces/interfaces';
 const {
   gameStatus,
   isLoading,
-  randomPokemon,
   pokemonOptions: options,
-  checkAnswer,
+  randomPokemon,
   idSelected,
+  errorMessage,
+  checkAnswer,
   getNextRound,
 } = usePokemonGame();
+
+console.log("🚀 ~ options:", options.value);
 
 const nextRoundButton = ref('Next Round');
 </script>
