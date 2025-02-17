@@ -6,18 +6,25 @@ import { GameStatus, type IPokemon, type IPokemonListResponse } from '../interfa
 export const usePokemonGame = () => {
   const gameStatus = ref<GameStatus>(GameStatus.Playing);
   const pokemons = ref<IPokemon[]>([]);
-  const pokemonOptions = ref<IPokemon[]>();
+  const pokemonOptions = ref<IPokemon[]>([]);
   const idSelected = ref<number>()
+  const errorMessage = ref<string>()
 
+  //Espera para que los datos se carguen, comienza como true y luego pasa a false
+  //cuando ya hay pokemones cargados
   const isLoading = computed(() => pokemons.value.length === 0);
 
   /* Llamada a la API */
   const getPokemons = async (): Promise<IPokemon[]> => {
-    const response = await pokemonApi.get<IPokemonListResponse>('/?limit=157wwwwwwwwww');
-
-    const pokemonList = extractPokemonNameAndId(response.data);
-
-    return shufflePokemonList(pokemonList);
+    try {
+      const response = await pokemonApi.get<IPokemonListResponse>('/?limit=157');
+      const pokemonList = extractPokemonNameAndId(response.data);
+      return shufflePokemonList(pokemonList);
+    } catch (error) {
+      console.log("Error to get pokemos from the API", error);
+      errorMessage.value = 'No se pudieron cargar los Pokémon. Inténtalo más tarde';
+      return[]
+    }
   };
 
   /* Extrae de los datos sólo el name y el id */
@@ -51,22 +58,17 @@ export const usePokemonGame = () => {
   const randomPokemon = computed(() => {
     if (!pokemonOptions.value?.length) return;
 
-    const selectedPokemon = Math.floor(Math.random() * pokemonOptions.value!.length);
+    const selectedPokemon = Math.floor(Math.random() * pokemonOptions.value.length);
 
-    return pokemonOptions.value![selectedPokemon!];
+    return pokemonOptions.value[selectedPokemon!];
   });
 
   // const randomPokemon = computed(() => pokemonOptions.value![Math.floor(Math.random() * pokemonOptions.value!.length)].name)
 
   const getNextRound = async (howMany: number = 4) => {
-    console.log("Cantidad de pokemons restantes", pokemons.value.length);
-
     if (pokemons.value.length < howMany) {
-      console.log("Poekmos antes de la llamda a getPokemons", pokemons.value.length);
       pokemons.value = await getPokemons()
-      console.log('Cantidad de pokemons Después de la llamda a getPokemos', pokemons.value.length);
     }
-
 
     gameStatus.value = GameStatus.Playing;
     pokemonOptions.value = pokemons.value.slice(0, howMany); //Devuelve los primeros 4 elementos(0,1,2,3)
@@ -92,20 +94,17 @@ export const usePokemonGame = () => {
   };
 
   onMounted(async () => {
-    console.log('onMounted');
     pokemons.value = await getPokemons();
     getNextRound();
-
-    console.log(pokemonOptions.value);
-    console.log("Finished mounted Process");
   });
 
   return {
     gameStatus,
     isLoading,
-    randomPokemon,
     pokemonOptions,
+    randomPokemon,
     idSelected,
+    errorMessage,
 
     //Methods
     getNextRound,

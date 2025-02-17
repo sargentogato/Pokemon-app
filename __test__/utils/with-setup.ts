@@ -7,9 +7,7 @@ export const withSetup = (composable: () => any) => {
     setup() {
       results = composable();
 
-      return () => {
-
-      }
+      return () => {}
     }
   })
 
