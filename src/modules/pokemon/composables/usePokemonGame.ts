@@ -67,11 +67,9 @@ export const usePokemonGame = () => {
 
   const getNextRound = async (howMany: number = 4) => {
     if (pokemons.value.length < howMany) {
-      console.log("Ha pasado por aquí");
 
       pokemons.value = await getPokemons()
     }
-    console.log("Fuera del if");
 
     gameStatus.value = GameStatus.Playing;
     pokemonOptions.value = pokemons.value.slice(0, howMany); //Devuelve los primeros 4 elementos(0,1,2,3)
