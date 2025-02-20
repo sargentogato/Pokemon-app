@@ -15,7 +15,7 @@
     <h1 class="m-5">¿Quién es este Pokémon</h1>
     <div class="boxBtn">
       <button
-        @click="getNextRound()"
+        @click="getNextRound(4)"
         :class="{
           notShow: gameStatus === GameStatus.Playing,
           show: gameStatus !== GameStatus.Playing
